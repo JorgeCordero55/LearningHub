@@ -1,103 +1,107 @@
-# LearningHub: lessons for AI coding agents
+# LearningHub: lecciones para agentes de IA que programan
 
-AI coding agents (Claude Code, Codex, Copilot, Cursor...) forget everything
-between conversations, so they repeat the same mistakes. This hub fixes that:
-when you correct an agent, it writes the mistake down as a rule, and every
-later conversation, in every project, reads those rules before working.
+Los agentes de IA que programan (Claude Code, Codex, Copilot, Cursor...)
+olvidan todo entre una conversación y otra, así que repiten los mismos
+errores. Este repositorio lo resuelve: cuando corriges a un agente, este
+anota el error como una regla, y cada conversación posterior, en cualquier
+proyecto, lee esas reglas antes de trabajar.
 
-It comes with lessons learned in real projects (`GENERAL.md`). Your copy is
-yours: your agents add your own lessons to it.
+Viene con lecciones aprendidas en proyectos reales (`GENERAL.md`). Tu copia
+es tuya: tus agentes le añaden tus propias lecciones.
 
-## What's here
+## Qué contiene
 
-- `GENERAL.md`: lessons that apply to any project.
-- `template/`: the files a project starts with (`AGENTS.md`, `CLAUDE.md`,
-  `docs/ai/LESSONS.md`).
+- `GENERAL.md`: lecciones que sirven para cualquier proyecto.
+- `template/`: los archivos con los que empieza un proyecto (`AGENTS.md`,
+  `CLAUDE.md`, `docs/ai/LESSONS.md`).
 
-Each project also keeps its own `docs/ai/LESSONS.md` for lessons that only
-make sense there (its folders, its servers, its client's decisions).
+Cada proyecto tiene además su propio `docs/ai/LESSONS.md` para lecciones
+que solo tienen sentido allí (sus carpetas, sus servidores, las decisiones
+de su cliente).
 
-## Setup (once per computer)
+## Instalación (una vez por computadora)
 
-### 1. Get the files
+### 1. Descarga los archivos
 
-Put the hub in the same folder as your projects, named `LearningHub`, so
-each project can reach it as `../LearningHub/`:
+Pon el repositorio en la misma carpeta que tus proyectos, con el nombre
+`LearningHub`, para que cada proyecto lo encuentre en `../LearningHub/`:
 
 ```
-code/
-├── LearningHub/      <- this repo
-├── project-a/
-└── project-b/
+codigo/
+├── LearningHub/      <- este repositorio
+├── proyecto-a/
+└── proyecto-b/
 ```
 
-- **With git:** in that folder, run
+- **Con git:** en esa carpeta, ejecuta
   `git clone https://github.com/JorgeCordero55/LearningHub.git`
-- **Without git:** on GitHub, **Code → Download ZIP**, extract it there and
-  rename the folder to `LearningHub`.
+- **Sin git:** en GitHub, **Code → Download ZIP**, descomprímelo allí y
+  cambia el nombre de la carpeta a `LearningHub`.
 
-### 2. Claude Code: load the lessons in every conversation
+### 2. Claude Code: cargar las lecciones en cada conversación
 
-Create (or add to) the file `CLAUDE.md` in your user folder's `.claude`
-folder (on Windows: `C:\Users\<you>\.claude\CLAUDE.md`):
+Crea (o añade al final de) el archivo `CLAUDE.md` dentro de la carpeta
+`.claude` de tu usuario (en Windows: `C:\Users\<tu usuario>\.claude\CLAUDE.md`):
 
 ```markdown
-# Shared learning hub for all projects
+# Lecciones compartidas para todos los proyectos
 
-The lessons below come from mistakes AI agents made in earlier projects;
-they apply here too. The hub's README.md explains how it works.
+Las lecciones de abajo vienen de errores que cometieron agentes de IA en
+proyectos anteriores; también aplican aquí. El README.md del repositorio
+explica cómo funciona.
 
-When the user corrects a mistake of yours, add a lesson in the same turn:
-to the hub's GENERAL.md if it would apply to another project, otherwise to
-the project's docs/ai/LESSONS.md (create it from the hub's template/ if the
-project has none).
+Cuando el usuario corrija un error tuyo, añade una lección en ese mismo
+turno: al GENERAL.md del repositorio si serviría en otro proyecto; si no, al
+docs/ai/LESSONS.md del proyecto (créalo desde template/ si el proyecto no lo
+tiene).
 
-@~/code/LearningHub/GENERAL.md
+@~/codigo/LearningHub/GENERAL.md
 ```
 
-Change the last line to where your `LearningHub` folder is. `~` is your user
-folder (`C:\Users\<you>`). Put a backslash before each space in the path:
-`@~/OneDrive\ -\ Company/code/LearningHub/GENERAL.md`.
+Cambia la última línea por la ruta de tu carpeta `LearningHub`. `~` es tu
+carpeta de usuario (`C:\Users\<tu usuario>`). Pon una barra invertida antes
+de cada espacio de la ruta:
+`@~/OneDrive\ -\ Empresa/codigo/LearningHub/GENERAL.md`.
 
-**Check it works:** open Claude Code in any folder and ask "What does
-GENERAL.md say about screenshot annotations?". It should answer from the
-file without opening it.
+**Comprueba que funciona:** abre Claude Code en cualquier carpeta y
+pregúntale "¿Qué dice GENERAL.md sobre las anotaciones en capturas de
+pantalla?". Debe responder con lo que dice el archivo.
 
-### 3. Other agents
+### 3. Otros agentes
 
-Most other AI coding tools (Codex, Copilot, Cursor...) read `AGENTS.md` in
-the project folder. The template's `AGENTS.md` points them to
-`../LearningHub/GENERAL.md` and the project's own lessons.
+La mayoría de las demás herramientas (Codex, Copilot, Cursor...) leen el
+`AGENTS.md` de la carpeta del proyecto. El `AGENTS.md` de la plantilla las
+dirige a `../LearningHub/GENERAL.md` y a las lecciones del propio proyecto.
 
-## Adding the hub to a project
+## Añadirlo a un proyecto
 
-- **New project:** copy everything in `template/` into the project folder
-  (keep the `docs/ai/` folders), then fill in `AGENTS.md`: what the project
-  is, how to run its tests, how it reaches production.
-- **Existing project:** if it already has an `AGENTS.md` or `CLAUDE.md`, add
-  the template's lines to them instead of replacing them.
+- **Proyecto nuevo:** copia todo lo que hay en `template/` a la carpeta del
+  proyecto (conserva las carpetas `docs/ai/`) y completa `AGENTS.md`: qué es
+  el proyecto, cómo se ejecutan sus pruebas, cómo llega a producción.
+- **Proyecto existente:** si ya tiene un `AGENTS.md` o un `CLAUDE.md`, añade
+  las líneas de la plantilla a esos archivos en vez de reemplazarlos.
 
-## Adding a lesson
+## Cómo se añade una lección
 
-When you correct an agent's mistake, it adds a lesson in the same turn (the
-setup above tells it to). You can also ask for one: "add a lesson about
-this".
+Cuando corriges un error de un agente, este añade una lección en ese mismo
+turno (la instalación de arriba se lo indica). También puedes pedírselo:
+"añade una lección sobre esto".
 
-1. **Where:** `GENERAL.md` if it would apply to another project; otherwise
-   the project's `docs/ai/LESSONS.md`.
-2. **What:** what happened (one or two lines, with the date) and the rule
-   that prevents it. Prefer a rule that can be checked.
-3. **If a rule keeps being broken,** turn it into a hook or deny rule in the
-   project's `.claude/settings.json` instead of repeating it louder: written
-   rules are advice, hooks are enforced.
+1. **Dónde:** en `GENERAL.md` si serviría en otro proyecto; si no, en el
+   `docs/ai/LESSONS.md` del proyecto.
+2. **Qué:** lo que pasó (una o dos líneas, con la fecha) y la regla que lo
+   evita. Mejor una regla que se pueda comprobar.
+3. **Si una regla se sigue rompiendo,** conviértela en un hook o una regla de
+   bloqueo en el `.claude/settings.json` del proyecto en vez de repetirla más
+   fuerte: las reglas escritas son consejos; los hooks se cumplen a la fuerza.
 
-Keep both files short (each is loaded into every conversation): merge
-duplicates, drop lessons that no longer apply. Never put passwords or keys
-in either.
+Mantén ambos archivos cortos (cada uno se carga en todas las
+conversaciones): une las lecciones repetidas y quita las que ya no apliquen.
+Nunca pongas contraseñas ni claves en ninguno de los dos.
 
-## Updates
+## Actualizaciones
 
-Only the owner changes this repository. To get lessons added to it later:
-with git, run `git pull` in your `LearningHub` folder (commit your own
-lessons first so git can merge them); without git, download the ZIP again
-and copy over the lessons you don't have.
+Solo el dueño modifica este repositorio. Para recibir las lecciones que se
+añadan después: con git, ejecuta `git pull` en tu carpeta `LearningHub`
+(antes guarda tus lecciones con un commit para que git pueda unirlas); sin
+git, descarga el ZIP otra vez y copia las lecciones que no tengas.

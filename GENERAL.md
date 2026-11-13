@@ -1,117 +1,131 @@
-# General lessons for AI agents (all projects)
+# Lecciones generales para agentes de IA (todos los proyectos)
 
-Mistakes AI agents made in real projects that apply to any project, each
-with the rule that prevents it. Loaded in every Claude Code conversation via
-`~/.claude/CLAUDE.md`; other agents are pointed here by each project's
-`AGENTS.md`. Project-specific lessons live in each project's
-`docs/ai/LESSONS.md`. How to add lessons: see `README.md` next to this file.
+Errores que cometieron agentes de IA en proyectos reales y que pueden
+repetirse en cualquier proyecto, cada uno con la regla que lo evita. Se carga
+en cada conversación de Claude Code mediante `~/.claude/CLAUDE.md`; a los
+demás agentes los dirige aquí el `AGENTS.md` de cada proyecto. Las lecciones
+propias de un proyecto van en su `docs/ai/LESSONS.md`. Cómo añadir lecciones:
+ver el `README.md` junto a este archivo.
 
-**This file is public.** Write lessons without people's names, internal
-server names, IP addresses, file paths, passwords or client data. Those
-belong in the project's own `docs/ai/LESSONS.md`.
+**Este archivo es público.** Escribe las lecciones sin nombres de personas,
+nombres de servidores internos, direcciones IP, rutas de archivos,
+contraseñas ni datos de clientes. Eso va en el `docs/ai/LESSONS.md` del
+proyecto.
 
-## Instructions and scope
+## Instrucciones y alcance
 
-- **Know the environment before raising the alarm.** A closed dev server was
-  described like a public production outage (2026-11-13). **Rule:** check
-  (or ask) whether it's dev, test or public, and match the urgency and tone
-  of the report to that.
-- **Screenshot annotations can mean the opposite of what they seem.** A red
-  circle over a folder name meant "not this one" and was read as "use this"
-  (2026-10-30). **Rule:** when an instruction rests on a screenshot, an
-  annotation, or a phrase with two readings, state your reading in one line
-  and ask before building.
-- **Build exactly what's asked.** "Make social media more visible" became
-  icons in a crowded header, then a side rail; neither was wanted
-  (2026-10-30). **Rule:** offer extras as suggestions; don't add them. When
-  going beyond a client's literal list, say so and ask.
-- **"The current X" may have two versions.** The committed and the
-  uncommitted text differed (2026-11-02). **Rule:** check `git diff` /
-  `git show HEAD:<file>` to know which version the user is looking at.
+- **Conoce el entorno antes de dar la alarma.** Un servidor de desarrollo
+  cerrado se describió como si fuera una caída de producción pública
+  (2026-11-13). **Regla:** comprueba (o pregunta) si es desarrollo, pruebas o
+  público, y ajusta la urgencia y el tono del informe a eso.
+- **Las anotaciones en capturas de pantalla pueden significar lo contrario de
+  lo que parecen.** Un círculo rojo sobre el nombre de una carpeta quería
+  decir "esta no" y se entendió como "usa esta" (2026-10-30). **Regla:**
+  cuando una instrucción depende de una captura, una anotación o una frase con
+  dos lecturas, di en una línea cómo la entiendes y pregunta antes de
+  construir.
+- **Haz exactamente lo que se pide.** "Hacer más visibles las redes sociales"
+  terminó en iconos dentro de un encabezado lleno y luego en una barra
+  lateral; no se quería ninguna de las dos (2026-10-30). **Regla:** ofrece los
+  extras como sugerencias; no los añadas. Si vas más allá de la lista literal
+  de un cliente, dilo y pregunta.
+- **"El X actual" puede tener dos versiones.** El texto guardado en git y el
+  texto sin guardar eran distintos (2026-11-02). **Regla:** revisa
+  `git diff` / `git show HEAD:<archivo>` para saber qué versión está viendo
+  el usuario.
 
-## Content and facts
+## Contenido y datos
 
-- **Never publish names, figures, dates, prices or facts without a source.**
-  Note the source in a comment next to the data. Missing data gets an empty
-  slot the page hides or explains, never a plausible guess. Press articles go
-  stale: don't take current officials' names from them.
-- **Delete unwanted text; don't hide it.** AI filler was filtered at import
-  time instead of removed, leaving it in the code and one rewording away from
-  reappearing.
-- **Check supplied images for AI markers** (search the file bytes for `c2pa`,
-  `trainedAlgorithmicMedia`, `openai`) and tell the user what you find; the
-  user decides whether to use them. Never crop text banners baked into images
-  the user supplied.
-- **One name per entity** across a site or app.
+- **Nunca publiques nombres, cifras, fechas, precios ni datos sin una
+  fuente.** Anota la fuente en un comentario junto al dato. Si falta un dato,
+  deja un espacio vacío que la página oculte o explique, nunca una suposición
+  verosímil. Los artículos de prensa envejecen: no saques de ellos los
+  nombres de los funcionarios actuales.
+- **Borra el texto que no se quiere; no lo escondas.** Un relleno escrito por
+  IA se filtraba al importarlo en vez de eliminarlo, así que seguía en el
+  código y bastaba cambiarle una palabra para que volviera a aparecer.
+- **Revisa las imágenes recibidas en busca de marcas de IA** (busca en los
+  bytes del archivo `c2pa`, `trainedAlgorithmicMedia`, `openai`) y dile al
+  usuario lo que encuentres; el usuario decide si se usan. Nunca recortes las
+  franjas de texto que vienen dentro de las imágenes que entregó el usuario.
+- **Un solo nombre para cada cosa** en todo un sitio o aplicación.
 
-## Production and deploy
+## Producción y despliegue
 
-- **Know whether the folder is live.** If a watcher or sync copies saved files
-  to production, a half-finished edit can go live: make each change complete
-  and run the tests before moving on.
-- **Never write to production directly** (servers, shares, databases). Use the
-  project's deploy procedure; if production is broken, tell the user.
-- **Code and its database migration must ship together.** Deploying code
-  before its migration caused hundreds of production errors. When you add a
-  migration, say so and make sure it gets applied.
-- **After a rejected or interrupted command, check the actual state** (`git
-  status`, the files) before reporting what changed. A command reported as
-  "not run" had deleted files (2026-11-02).
-- **An error page that says "the team has been notified" must be true:**
-  check that error emails or alerts are configured.
-- **Automated checks against a site must identify themselves** (a header the
-  analytics skip), or they count as visits and skew the statistics
-  (2026-11-13). Check what a site records before crawling it.
+- **Averigua si la carpeta está en vivo.** Si un vigilante de archivos o una
+  sincronización copia a producción lo que se guarda, una edición a medias
+  puede publicarse: termina cada cambio y ejecuta las pruebas antes de
+  seguir.
+- **Nunca escribas directamente en producción** (servidores, carpetas
+  compartidas, bases de datos). Usa el procedimiento de despliegue del
+  proyecto; si producción está rota, avísale al usuario.
+- **El código y su migración de base de datos se publican juntos.** Publicar
+  código antes de su migración provocó cientos de errores en producción.
+  Cuando añadas una migración, dilo y asegúrate de que se aplique.
+- **Después de un comando rechazado o interrumpido, revisa el estado real**
+  (`git status`, los archivos) antes de informar qué cambió. Un comando
+  reportado como "no ejecutado" había borrado archivos (2026-11-02).
+- **Una página de error que dice "el equipo ha sido notificado" debe decir
+  la verdad:** comprueba que los correos o alertas de error estén
+  configurados.
+- **Las comprobaciones automáticas contra un sitio deben identificarse** (con
+  una cabecera que las estadísticas ignoren), o cuentan como visitas y
+  distorsionan las estadísticas (2026-11-13). Revisa qué registra un sitio
+  antes de recorrerlo.
 
-## Code editing
+## Edición de código
 
-- **When inserting code above a function, anchor above its decorators.** A
-  helper inserted between a caching decorator and its view broke a live page
-  (2026-11-04).
-- **Look for an existing component before writing new CSS or templates;**
-  don't add rules that only undo earlier rules. Duplicated base templates mean
-  a change has to be made in every copy.
+- **Al insertar código encima de una función, ponlo encima de sus
+  decoradores.** Una función auxiliar insertada entre un decorador de caché y
+  su vista rompió una página en vivo (2026-11-04).
+- **Busca un componente existente antes de escribir CSS o plantillas
+  nuevas;** no añadas reglas que solo deshacen reglas anteriores. Si hay
+  plantillas base duplicadas, un cambio debe hacerse en cada copia.
 
-## Verification
+## Verificación
 
-- **Give yourself a check and show evidence:** run the tests, and for UI work
-  look at the page in a real browser (screenshots, clicks, measurements), not
-  just the code. A headless browser is enough (Edge or Chrome with
-  `--headless --screenshot`).
-- **Restart dev servers started without auto-reload** after code changes, or
-  checks show old code.
-- **Check what the user will see:** grids with the same image twice, labels
-  without context, text whose final color comes from a later rule, menus that
-  overflow at in-between widths (around 1400–1500px), page weight after adding
-  images.
+- **Date una forma de comprobar tu trabajo y muestra la evidencia:** ejecuta
+  las pruebas y, en trabajo de interfaz, mira la página en un navegador real
+  (capturas, clics, medidas), no solo el código. Basta un navegador sin
+  ventana (Edge o Chrome con `--headless --screenshot`).
+- **Reinicia los servidores de desarrollo que no se recargan solos** después
+  de cambiar el código, o las comprobaciones mostrarán el código viejo.
+- **Revisa lo que verá el usuario:** cuadrículas con la misma imagen dos
+  veces, etiquetas sin contexto, textos cuyo color final viene de una regla
+  posterior, menús que se desbordan en anchos intermedios (alrededor de
+  1400–1500px), el peso de la página después de añadir imágenes.
 
-## Windows, OneDrive and agent tooling
+## Windows, OneDrive y herramientas del agente
 
-- Bash heredocs containing an apostrophe fail in the agent's shell tool; write
-  such content with a file-writing tool.
-- OneDrive can lock files mid-build (e.g. `staticfiles/` during
-  `collectstatic`); retry.
-- File watchers in OneDrive folders can miss changes or keep restarting; touch
-  a changed file to re-trigger.
-- Pushing work code to a personal GitHub account can be blocked by the
-  agent's safety classifier; the user pushes.
-- PowerShell names are case-insensitive: a helper function named `Git`
-  calls itself instead of `git.exe` (infinite recursion). Name helpers
-  `Invoke-Git` and call `git.exe` explicitly (2026-11-13).
-- Windows PowerShell 5.1 turns a native program's stderr into terminating
-  errors under `$ErrorActionPreference = "Stop"`; for scripts that run git or
-  Python, use "Continue" and check `$LASTEXITCODE`. Keep `.ps1` files ASCII
-  (5.1 misreads UTF-8 without BOM).
-- Non-ASCII file names: git quotes and octal-escapes them unless
-  `-c core.quotepath=false` (and the console reads UTF-8), and Windows'
-  `tar` unpacks them garbled; use `git archive --format=zip` + .NET
-  `ZipFile.ExtractToDirectory(..., UTF8)`. A deploy stopped on a file named
-  "Formulario de Evaluación" (2026-11-13).
-- **A dry run must exercise every step it safely can**, not just the checks:
-  a deploy's dry run skipped the copy step and missed a path bug that only
-  showed in the real run. Verify inputs of the side-effect steps too.
-- WinRM (`Invoke-Command`) in a domain needs the server's name, not its IP
-  (Kerberos); by IP it demands TrustedHosts and explicit credentials.
-- Python 3.13+ rejects some internal CA certificates ("CA cert does not
-  include key usage extension") that browsers accept: clear only
-  `ssl.VERIFY_X509_STRICT`; never turn verification off.
+- Los heredocs de Bash que contienen un apóstrofo fallan en la herramienta de
+  terminal del agente; escribe ese contenido con una herramienta de escritura
+  de archivos.
+- OneDrive puede bloquear archivos a mitad de una compilación (por ejemplo
+  `staticfiles/` durante `collectstatic`); vuelve a intentarlo.
+- Los vigilantes de archivos en carpetas de OneDrive pueden no ver cambios o
+  reiniciarse sin parar; toca un archivo modificado para que reaccionen.
+- El clasificador de seguridad del agente puede bloquear subir código de
+  trabajo a una cuenta personal de GitHub; el push lo hace el usuario.
+- PowerShell no distingue mayúsculas en los nombres: una función auxiliar
+  llamada `Git` se llama a sí misma en vez de a `git.exe` (recursión
+  infinita). Nombra las funciones `Invoke-Git` y llama a `git.exe`
+  explícitamente (2026-11-13).
+- Windows PowerShell 5.1 convierte la salida de error de un programa externo
+  en errores que detienen el script con `$ErrorActionPreference = "Stop"`; en
+  scripts que ejecutan git o Python, usa "Continue" y revisa
+  `$LASTEXITCODE`. Mantén los `.ps1` en ASCII (5.1 lee mal el UTF-8 sin BOM).
+- Nombres de archivo con caracteres no ASCII: git los pone entre comillas y
+  los escapa en octal salvo con `-c core.quotepath=false` (y la consola en
+  UTF-8), y el `tar` de Windows los descomprime dañados; usa
+  `git archive --format=zip` + .NET `ZipFile.ExtractToDirectory(..., UTF8)`.
+  Un despliegue se detuvo en un archivo llamado "Formulario de Evaluación"
+  (2026-11-13).
+- **Un ensayo (dry run) debe ejecutar todos los pasos que pueda sin riesgo**,
+  no solo las comprobaciones: el ensayo de un despliegue se saltaba el paso de
+  copia y no detectó un error de rutas que solo apareció en el despliegue
+  real. Verifica también lo que reciben los pasos que hacen cambios.
+- WinRM (`Invoke-Command`) en un dominio necesita el nombre del servidor, no
+  su IP (Kerberos); con la IP exige TrustedHosts y credenciales explícitas.
+- Python 3.13+ rechaza algunos certificados de CA internos ("CA cert does not
+  include key usage extension") que los navegadores aceptan: desactiva solo
+  `ssl.VERIFY_X509_STRICT`; nunca desactives la verificación.

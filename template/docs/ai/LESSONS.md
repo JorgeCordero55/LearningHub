@@ -1,13 +1,13 @@
-# Lessons for AI agents working on <project name>
+# Lecciones para agentes de IA que trabajan en <nombre del proyecto>
 
-Mistakes AI agents made on this project, each with the rule that prevents it.
-Lessons that would apply to any project go in `../LearningHub/GENERAL.md`
-instead (path from the project root).
+Errores que cometieron agentes de IA en este proyecto, cada uno con la regla
+que lo evita. Las lecciones que servirían en cualquier proyecto van en
+`../LearningHub/GENERAL.md` (ruta desde la raíz del proyecto).
 
-This file stays with the project, so it can name its servers, folders and
-decisions; keep secrets (passwords, keys) out of it all the same.
+Este archivo se queda con el proyecto, así que puede nombrar sus servidores,
+carpetas y decisiones; aun así, nada de secretos (contraseñas, claves).
 
-Entry format: **date · what happened** (one or two lines), then **Rule:** the
-rule, preferably one that can be checked.
+Formato de cada entrada: **fecha · lo que pasó** (una o dos líneas), luego
+**Regla:** la regla, mejor si se puede comprobar.
 
-<!-- No lessons yet. -->
+<!-- Todavía no hay lecciones. -->

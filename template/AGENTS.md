@@ -1,23 +1,23 @@
-# <Project name>: rules for AI agents
+# <Nombre del proyecto>: reglas para agentes de IA
 
-<One or two lines: what this project is, its stack, where it runs.>
+<Una o dos líneas: qué es este proyecto, su tecnología, dónde funciona.>
 
-**Before working, read** `../LearningHub/GENERAL.md` (lessons from all
-projects) and `docs/ai/LESSONS.md` (lessons from this one). When the user
-corrects a mistake of yours, add a lesson to the right one in the same turn
-(see `../LearningHub/README.md`).
+**Antes de trabajar, lee** `../LearningHub/GENERAL.md` (lecciones de todos
+los proyectos) y `docs/ai/LESSONS.md` (lecciones de este). Cuando el usuario
+corrija un error tuyo, añade una lección en el archivo que corresponda en ese
+mismo turno (ver `../LearningHub/README.md`).
 
-## Commands
+## Comandos
 
-- Tests: `<exact command>`
-- Dev server: `<exact command>`
+- Pruebas: `<comando exacto>`
+- Servidor de desarrollo: `<comando exacto>`
 
-## How it reaches production
+## Cómo llega a producción
 
-<Deploy procedure. Is the folder synced live? Are migrations applied
-automatically? Never write to production directly.>
+<Procedimiento de despliegue. ¿La carpeta se sincroniza en vivo? ¿Las
+migraciones se aplican solas? Nunca escribas directamente en producción.>
 
-## Working rules
+## Reglas de trabajo
 
-<Only what an agent can't learn by reading the code: decisions, constraints,
-patterns not to copy.>
+<Solo lo que un agente no puede aprender leyendo el código: decisiones,
+restricciones, patrones que no se deben copiar.>
