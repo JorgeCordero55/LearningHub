@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: tarjetas-de-servicios
+expected_outcome: |
+  Each of the three cards has its own animated line drawing (inline SVG with CSS animation), different from the others and clearly about its service, using the card rather than a thin strip; the text stays readable and clear of the drawings on a phone and on a desktop; nothing is drawn outside the cards; every animation stops when the visitor asks for reduced motion; no animation libraries, images or filters on moving parts.
+context:
+  scaffold_script: place-files.sh

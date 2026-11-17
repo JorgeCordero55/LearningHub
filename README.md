@@ -14,6 +14,8 @@ es tuya: tus agentes le añaden tus propias lecciones.
 - `GENERAL.md`: lecciones que sirven para cualquier proyecto.
 - `template/`: los archivos con los que empieza un proyecto (`AGENTS.md`,
   `CLAUDE.md`, `docs/ai/LESSONS.md`).
+- `skills/`: skills para Claude, cada una en su carpeta (ver
+  [Skills](#skills)).
 
 Cada proyecto tiene además su propio `docs/ai/LESSONS.md` para lecciones
 que solo tienen sentido allí (sus carpetas, sus servidores, las decisiones
@@ -98,6 +100,34 @@ turno (la instalación de arriba se lo indica). También puedes pedírselo:
 Mantén ambos archivos cortos (cada uno se carga en todas las
 conversaciones): une las lecciones repetidas y quita las que ya no apliquen.
 Nunca pongas contraseñas ni claves en ninguno de los dos.
+
+## Skills
+
+Una skill es una carpeta con instrucciones (y a veces scripts) que Claude
+carga cuando lo que le pides encaja con su descripción. Le da a tu agente el
+proceso, las técnicas y las revisiones con las que se consiguió un buen
+resultado, en vez de dejar que improvise.
+
+- `skills/animated-line-art/`: dibujos de líneas animados (SVG y CSS) para
+  tarjetas, banners y secciones de un sitio web. Trae el proceso (conceptos y
+  vista previa antes de construir), las técnicas con código, una lista de
+  errores que ya se cometieron, y un script que deja al agente fotografiar,
+  congelar y medir la página en un navegador sin interfaz. Necesita Node.js
+  22 o más reciente y Microsoft Edge o Google Chrome.
+
+Para instalar una skill:
+
+- **Claude Code, en todos tus proyectos:** copia su carpeta a `.claude/skills/`
+  dentro de tu carpeta de usuario (en Windows:
+  `C:\Users\<tu usuario>\.claude\skills\`).
+- **Claude Code, en un proyecto:** cópiala a `.claude/skills/` dentro del
+  proyecto y haz commit, para que todo el equipo la tenga.
+- **App de Claude (web o escritorio):** comprime la carpeta de la skill en un
+  `.zip` y súbelo como skill personalizada, si tu organización lo permite.
+
+Claude la usa por su cuenta cuando tu pedido encaja; también puedes pedirla
+por su nombre: "usa la skill animated-line-art". La carpeta `evals/` de cada
+skill trae casos de prueba; no hace falta copiarla.
 
 ## Actualizaciones
 

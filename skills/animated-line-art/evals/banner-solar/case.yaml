@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: banner-solar
+expected_outcome: |
+  The banner has an animated line drawing (inline SVG with CSS animation) showing a school roof with solar panels, the sun and energy flowing to nearby houses, as part of the banner rather than a small icon; the heading, paragraph and button stay readable and uncovered on a phone and a desktop; nothing spills out of the banner; every animation stops with reduced motion; no animation libraries, images or filters on moving parts.
+context:
+  scaffold_script: place-files.sh

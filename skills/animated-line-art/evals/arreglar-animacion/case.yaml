@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: arreglar-animacion
+expected_outcome: |
+  The Monitoreo card keeps its idea (a signal wave with a dot) but: nothing is drawn outside the card at any width; on a phone (390 px) the drawing no longer covers the title or the text; with reduced motion every animation in the card stops (the reduced-motion rule now wins, e.g. placed after the animation rules); moving parts no longer use filters; the other card is unchanged.
+context:
+  scaffold_script: place-files.sh
