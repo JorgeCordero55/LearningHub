@@ -52,10 +52,14 @@ rondas de revisión.
    (`max-width`) para que no llegue al protagonista.
 4. **Anímalo.** Un solo ciclo para toda la tarjeta (5 a 7 s), con dos o tres
    tipos de movimiento como mucho, y retardos que sigan la historia: lo que
-   responde empieza cuando le llega lo que viaja. El código de cada movimiento
-   está en `references/techniques.md`.
-5. **Una mirada al final.** Dos capturas con la animación congelada a mitad
-   del ciclo, una de escritorio y una de teléfono:
+   responde empieza cuando le llega lo que viaja. Sigue el "Ritmo" de abajo; el
+   código de cada movimiento está en `references/techniques.md`.
+5. **Una mirada al final.** Primero repasa el código (búscalo, no hace falta
+   abrir nada): no hay `transition: all`, solo se animan `transform`,
+   `opacity` y `stroke-dashoffset`, nada que se mueva tiene `filter`, el SVG
+   tiene `clip-path` y el bloque de movimiento reducido está al final. Luego
+   dos capturas con la animación congelada a mitad del ciclo, una de
+   escritorio y una de teléfono:
 
    ```bash
    node scripts/shoot.mjs --url <página> --out escritorio.png --width 1440 --selector ".tile" --time 2000
@@ -65,6 +69,24 @@ rondas de revisión.
    Busca texto tapado, algo que se sale, un borde apretado o una forma que se
    transparenta. Arregla lo que veas y termina; no abras más rondas. Si no
    puedes correr el script, abre la página y mírala.
+
+## Ritmo
+
+Pocas reglas fijas hacen que todo se vea del mismo autor:
+
+- **Lo que viaja a velocidad constante** (luz por un cable, agua por un
+  tubo) va con `linear`. **Lo que llega y se detiene** (un objeto que cae, una
+  aguja que se asienta) va con `cubic-bezier(0.22, 1, 0.36, 1)`. Nunca
+  `linear` para algo que frena.
+- **Lo que se enciende** aparece en 150 a 400 ms y se apaga más despacio que
+  como se encendió. Varias cosas en cadena: entre 50 y 150 ms una de otra.
+- **Un momento orquestado vale más que muchos efectos sueltos.** En una fila
+  de tarjetas, desfasa los ciclos (`animation-delay` distinto en cada una)
+  para que no se enciendan todas a la vez.
+- **Con movimiento reducido, reduce; no quites.** Muestra el estado final
+  (la escena encendida y completa), no un dibujo a medias.
+- **Al pasar el puntero,** acelera como mucho (ver `techniques.md`), y solo
+  con ratón: `@media (hover: hover) and (pointer: fine)`.
 
 ## Reglas al construir
 
@@ -85,6 +107,10 @@ hace falta buscarlos después.
   quieto se vea terminado: luces apagadas o la escena completa.
 - **Sin filtros en lo que se mueve:** los brillos son una copia más ancha y
   translúcida del trazo.
+- **Anima solo `transform`, `opacity` y `stroke-dashoffset`;** nunca
+  `width`, `height`, `top`/`left` ni `transition: all`. Pausa los bucles que
+  quedan fuera de pantalla (`IntersectionObserver` y
+  `animation-play-state: paused`, ver `techniques.md`).
 - **Si una parte debe quedar arriba y otra en el suelo,** usa dos cajas, una
   anclada arriba y otra abajo, con la misma escala: si la tarjeta crece, una
   sola caja anclada abajo sube hasta el título.

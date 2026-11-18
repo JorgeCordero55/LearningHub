@@ -320,10 +320,12 @@ fibras = [offset_quadratic((-420, 8), (-30, 80), (240, 50), k * 4.5) for k in (-
 ## 11. Acelerar al pasar el puntero
 
 Cambia la velocidad con `playbackRate`, de forma gradual, no cambiando
-`animation-duration` (eso reinicia el ciclo y el movimiento salta):
+`animation-duration` (eso reinicia el ciclo y el movimiento salta). Solo con
+ratón: en un teléfono, tocar la tarjeta la dejaría acelerada.
 
 ```js
-if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+if (!matchMedia("(prefers-reduced-motion: reduce)").matches &&
+    matchMedia("(hover: hover) and (pointer: fine)").matches) {
     document.querySelectorAll(".tile").forEach((tile) => {
         let frame = null;
         const rampTo = (target) => {
