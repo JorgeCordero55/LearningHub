@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plantilla: tarjeta con dibujo animado</title>
+<style>
+  /* Ejemplo completo de la estructura: cópialo y cambia el dibujo por tu
+     propia idea. Un edificio de pie a la derecha; un cable baja desde arriba
+     hasta su techo; la luz baja por el cable y los pisos se encienden de
+     arriba abajo; todo descansa y el ciclo vuelve a empezar. */
+  :root { --card: #1b5a7a; --line: #ffffff; }
+  body { margin: 0; padding: 40px 16px; background: #12324a; font-family: system-ui, sans-serif; }
+
+  .tile {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;     /* el texto abajo */
+    gap: 8px;
+    max-width: 420px;
+    min-height: 280px;
+    margin: 0 auto;
+    padding: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 12px;
+    background: var(--card);
+    color: #fff;
+    text-decoration: none;
+  }
+
+  /* El texto encima del dibujo, y a su izquierda: el dibujo ocupa la
+     columna derecha de arriba abajo. */
+  .tile > span { position: relative; z-index: 2; max-width: calc(100% - 96px); }
+  .tile-title { font-size: 1.15rem; font-weight: 700; text-transform: uppercase; }
+  .tile-text { line-height: 1.5; opacity: 0.9; }
+  .tile-link { font-weight: 700; }
+
+  .tile-art {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    clip-path: inset(0 round 11px);  /* nada sale de la tarjeta */
+    pointer-events: none;
+  }
+  .tile-art--moving { will-change: transform; }  /* su propia capa */
+
+  /* Un ciclo de 6 s para todo. La luz baja por el cable en el primer 15 %
+     (llega al techo hacia 0,7 s); los pisos se encienden a partir de 0,75 s,
+     uno cada 0,12 s; se apagan hacia la mitad del ciclo y descansan. */
+  .drop { stroke-dasharray: 0.25 2; stroke-dashoffset: 0.27; animation: drop 6s linear infinite; }
+  .lit { opacity: 0; animation: lit 6s linear infinite; }
+  @keyframes drop { 0% { stroke-dashoffset: 0.27; } 15%, 100% { stroke-dashoffset: -1.02; } }
+  @keyframes lit { 0% { opacity: 0; } 3% { opacity: 1; } 45% { opacity: 1; } 55%, 100% { opacity: 0; } }
+
+  /* Al final del CSS, después de las reglas que animan: así gana. */
+  @media (prefers-reduced-motion: reduce) {
+    .drop, .lit { animation: none; }
+  }
+</style>
+</head>
+<body>
+<a class="tile" href="#">
+  <!-- El dibujo quieto: caja de 300 x 280 anclada abajo a la derecha. -->
+  <svg class="tile-art" aria-hidden="true" focusable="false">
+    <svg viewBox="0 0 300 280" width="100%" height="100%" preserveAspectRatio="xMaxYMax meet" overflow="visible">
+      <path d="M120 262 L320 262" stroke="#ffffff" stroke-opacity="0.35" fill="none" />
+      <g fill="none" stroke="#ffffff" stroke-opacity="0.12" stroke-width="5"><path d="M243 -60 L243 104" /></g>
+      <g fill="none" stroke="#ffffff" stroke-opacity="0.55" stroke-width="1.4"><path d="M243 -60 L243 104" /></g>
+      <!-- Formas rellenas con el color de la tarjeta: nada se transparenta. -->
+      <g fill="#1b5a7a" stroke="#ffffff" stroke-opacity="0.85" stroke-width="1.5" stroke-linejoin="round">
+        <path d="M210 262 L210 116 L276 116 L276 262" />
+        <rect x="236" y="104" width="14" height="12" rx="1.5" />
+      </g>
+      <g fill="#ffffff" fill-opacity="0.2">
+        <rect x="218" y="128" width="10" height="12" /><rect x="238" y="128" width="10" height="12" /><rect x="258" y="128" width="10" height="12" />
+        <rect x="218" y="150" width="10" height="12" /><rect x="238" y="150" width="10" height="12" /><rect x="258" y="150" width="10" height="12" />
+        <rect x="218" y="172" width="10" height="12" /><rect x="238" y="172" width="10" height="12" /><rect x="258" y="172" width="10" height="12" />
+        <rect x="218" y="194" width="10" height="12" /><rect x="238" y="194" width="10" height="12" /><rect x="258" y="194" width="10" height="12" />
+        <rect x="218" y="216" width="10" height="12" /><rect x="238" y="216" width="10" height="12" /><rect x="258" y="216" width="10" height="12" />
+        <rect x="218" y="238" width="10" height="12" /><rect x="238" y="238" width="10" height="12" /><rect x="258" y="238" width="10" height="12" />
+      </g>
+    </svg>
+  </svg>
+  <!-- Las partes que se mueven, en su propia capa, con la misma caja. -->
+  <svg class="tile-art tile-art--moving" aria-hidden="true" focusable="false">
+    <svg viewBox="0 0 300 280" width="100%" height="100%" preserveAspectRatio="xMaxYMax meet" overflow="visible">
+      <g fill="none" stroke="#ffffff" stroke-linecap="round">
+        <path class="drop" pathLength="1" d="M243 -60 L243 104" stroke-width="7" stroke-opacity="0.2" />
+        <path class="drop" pathLength="1" d="M243 -60 L243 104" stroke-width="2.2" />
+      </g>
+      <g fill="#ffffff">
+        <g class="lit" style="animation-delay: 0.75s"><rect x="218" y="128" width="10" height="12" /><rect x="238" y="128" width="10" height="12" /><rect x="258" y="128" width="10" height="12" /></g>
+        <g class="lit" style="animation-delay: 0.87s"><rect x="218" y="150" width="10" height="12" /><rect x="238" y="150" width="10" height="12" /><rect x="258" y="150" width="10" height="12" /></g>
+        <g class="lit" style="animation-delay: 0.99s"><rect x="218" y="172" width="10" height="12" /><rect x="238" y="172" width="10" height="12" /><rect x="258" y="172" width="10" height="12" /></g>
+        <g class="lit" style="animation-delay: 1.11s"><rect x="218" y="194" width="10" height="12" /><rect x="238" y="194" width="10" height="12" /><rect x="258" y="194" width="10" height="12" /></g>
+        <g class="lit" style="animation-delay: 1.23s"><rect x="218" y="216" width="10" height="12" /><rect x="238" y="216" width="10" height="12" /><rect x="258" y="216" width="10" height="12" /></g>
+        <g class="lit" style="animation-delay: 1.35s"><rect x="218" y="238" width="10" height="12" /><rect x="238" y="238" width="10" height="12" /><rect x="258" y="238" width="10" height="12" /></g>
+      </g>
+    </svg>
+  </svg>
+  <span class="tile-title">Red de datos</span>
+  <span class="tile-text">Conexiones de alta capacidad para oficinas e instituciones.</span>
+  <span class="tile-link">Ver el servicio →</span>
+</a>
+</body>
+</html>

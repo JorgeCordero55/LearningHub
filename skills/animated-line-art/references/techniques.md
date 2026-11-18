@@ -309,10 +309,9 @@ fibras = [offset_quadratic((-420, 8), (-30, 80), (240, 50), k * 4.5) for k in (-
   límite en el título, en `em`, para que el corte de línea no dependa del ancho
   de la tarjeta: `max-width: min(calc(100% - 44px), 11.5em)` mantiene un
   título largo en dos líneas estables.
-- Mide con `scripts/text-boxes.js` en todos los anchos. La distribución más
-  angosta con tarjetas lado a lado es donde el texto se parte más y las
-  tarjetas crecen más. Marca con `data-keep-clear` las formas que deben quedar
-  libres para obtener la lista de todo lo que el texto toca.
+- En una fila de tarjetas, el ancho más angosto en que siguen lado a lado es
+  donde el texto se parte más y las tarjetas crecen más: si vas a mirar un
+  ancho además del teléfono, que sea ese.
 - Cuando las líneas tengan que pasar detrás del texto, suavízalas solo ahí
   (una máscara hecha con las cajas del texto, con una copia un poco borrosa
   detrás) y oculta ahí las partes que se mueven. Nunca atenúes todo el dibujo

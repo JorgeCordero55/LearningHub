@@ -108,12 +108,13 @@ carga cuando lo que le pides encaja con su descripción. Le da a tu agente el
 proceso, las técnicas y las revisiones con las que se consiguió un buen
 resultado, en vez de dejar que improvise.
 
-- `skills/animated-line-art/`: dibujos de líneas animados (SVG y CSS) para
-  tarjetas, banners y secciones de un sitio web. Trae el proceso (conceptos y
-  vista previa antes de construir), las técnicas con código, una lista de
-  errores que ya se cometieron, y un script que deja al agente fotografiar,
-  congelar y medir la página en un navegador sin interfaz. Necesita Node.js
-  22 o más reciente y Microsoft Edge o Google Chrome.
+- `skills/animated-line-art/`: una guía para hacer dibujos de líneas
+  animados (SVG y CSS) para tarjetas, banners y secciones de un sitio web, de
+  una vez y sin gastar de más: qué hace bueno un dibujo, cómo hacerlo en cinco
+  pasos, reglas que evitan errores ya cometidos, ideas por tipo de servicio,
+  una plantilla lista para copiar y las técnicas con código. Para la mirada
+  final usa un script de capturas que necesita Node.js 22 o más reciente y
+  Microsoft Edge o Google Chrome.
 
 Para instalar una skill:
 
