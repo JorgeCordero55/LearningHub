@@ -76,6 +76,9 @@ rondas de revisión.
    node scripts/shoot.mjs --url <página> --out telefono.png --width 390 --selector ".tile" --time 2000
    ```
 
+   No abras el script: estos dos comandos bastan, y si necesitas otra
+   opción, `node scripts/shoot.mjs --help` las lista.
+
    Busca texto tapado, algo que se sale, un borde apretado o una forma que se
    transparenta. Si arreglas algo, repite esas mismas dos capturas una vez y
    termina: no pruebes otros anchos ni otros momentos del ciclo. Si no puedes
@@ -160,5 +163,5 @@ hace falta buscarlos después.
 - `references/generator.md`: no lo leas salvo que el dibujo tenga decenas de
   piezas calculadas (ventanas, pistas paralelas, retardos desde largos).
 - `scripts/shoot.mjs`: la mirada final (capturas en un navegador sin
-  interfaz, con la animación congelada en un momento). `--help` lista sus
-  opciones.
+  interfaz, con la animación congelada en un momento). No hace falta leerlo:
+  `--help` lista sus opciones.
