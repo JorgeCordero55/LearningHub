@@ -24,6 +24,10 @@ rondas de revisión.
   franja de líneas encima del título se lee como un adorno.
 - **Una idea, fiel al tema.** Lo que la cosa es o hace de verdad, tomado del
   texto del propio sitio. Nunca inventes datos ni cifras.
+- **Todo lo que el texto nombra se reconoce.** Si dice "fibra y radioenlaces
+  que conectan oficinas", se ven la fibra, la radio y las oficinas; si dice
+  "recogida selectiva y clasificación", cada objeto cae en su propio
+  contenedor. Una parte que solo se ve al encenderse no cuenta.
 - **Las vecinas se distinguen.** En una fila, cada dibujo tiene otra idea y
   otra forma: una torre, un chip, un medidor, edificios.
 - **Cuenta una historia corta y descansa.** Algo llega (luz, agua, datos),
@@ -36,7 +40,10 @@ rondas de revisión.
 ## Cómo hacerlo
 
 1. **Entiende la tarjeta.** Lee solo lo necesario: qué servicio es, su texto,
-   su tamaño y dónde queda el texto (casi siempre abajo a la izquierda).
+   su tamaño y dónde queda el texto (casi siempre abajo a la izquierda). De
+   esta skill basta con esta página y `assets/plantilla.html`; de
+   `references/techniques.md` lee solo la sección que vayas a usar (tiene un
+   índice al principio).
 2. **Elige una idea.** Pregúntate qué es o qué hace físicamente el servicio y
    arma una escena con un protagonista y un flujo que llega y provoca una
    respuesta (ver "Ideas que funcionan"). Elige una y sigue. Solo si la persona
@@ -49,7 +56,10 @@ rondas de revisión.
    `xMaxYMin` si cuelga de arriba, `xMaxYMid` si va centrado), recortada en la
    tarjeta. Pon el protagonista en la columna derecha, de arriba abajo, y deja
    que lo que viaja entre o salga por los bordes. Limita el ancho del texto
-   (`max-width`) para que no llegue al protagonista.
+   (`max-width`) para que no llegue al protagonista. Conserva el bloque
+   `@container` de la plantilla: en tarjetas angostas pasa el dibujo arriba y
+   el texto debajo, así los teléfonos pequeños quedan resueltos sin probarlos
+   uno por uno.
 4. **Anímalo.** Un solo ciclo para toda la tarjeta (5 a 7 s), con dos o tres
    tipos de movimiento como mucho, y retardos que sigan la historia: lo que
    responde empieza cuando le llega lo que viaja. Sigue el "Ritmo" de abajo; el
@@ -67,8 +77,18 @@ rondas de revisión.
    ```
 
    Busca texto tapado, algo que se sale, un borde apretado o una forma que se
-   transparenta. Arregla lo que veas y termina; no abras más rondas. Si no
-   puedes correr el script, abre la página y mírala.
+   transparenta. Si arreglas algo, repite esas mismas dos capturas una vez y
+   termina: no pruebes otros anchos ni otros momentos del ciclo. Si no puedes
+   correr el script, abre la página y mírala.
+
+## Solo lo pedido
+
+Haz el dibujo y su animación; nada más. Acelerar al pasar el puntero, pausar
+fuera de pantalla, un botón para detener animaciones, estilos de foco o un
+script que genere el dibujo: solo si la persona los pide (o el dibujo tiene
+decenas de piezas calculadas, en el caso del script). Si ves que falta algo,
+por ejemplo que el sitio no tiene cómo detener animaciones (WCAG 2.2.2 lo
+pide para bucles de más de 5 segundos), anótalo en una línea en tu resumen.
 
 ## Ritmo
 
@@ -85,8 +105,6 @@ Pocas reglas fijas hacen que todo se vea del mismo autor:
   para que no se enciendan todas a la vez.
 - **Con movimiento reducido, reduce; no quites.** Muestra el estado final
   (la escena encendida y completa), no un dibujo a medias.
-- **Al pasar el puntero,** acelera como mucho (ver `techniques.md`), y solo
-  con ratón: `@media (hover: hover) and (pointer: fine)`.
 
 ## Reglas al construir
 
@@ -108,18 +126,15 @@ hace falta buscarlos después.
 - **Sin filtros en lo que se mueve:** los brillos son una copia más ancha y
   translúcida del trazo.
 - **Anima solo `transform`, `opacity` y `stroke-dashoffset`;** nunca
-  `width`, `height`, `top`/`left` ni `transition: all`. Pausa los bucles que
-  quedan fuera de pantalla (`IntersectionObserver` y
-  `animation-play-state: paused`, ver `techniques.md`).
+  `width`, `height`, `top`/`left` ni `transition: all`.
 - **Si una parte debe quedar arriba y otra en el suelo,** usa dos cajas, una
   anclada arriba y otra abajo, con la misma escala: si la tarjeta crece, una
   sola caja anclada abajo sube hasta el título.
 - **Las reglas genéricas atrapan decoraciones:** una regla como
   `.tile > :not(svg) { position: relative }` también cambia cualquier span
   decorativo que añadas.
-- **Bucles de más de 5 segundos:** la pauta WCAG 2.2.2 pide una forma de
-  pausarlos (el botón del sitio para detener animaciones, uno propio, o que se
-  detengan tras unos ciclos). Si el sitio no tiene ninguna, dilo.
+- **Si el sitio tiene un control para detener animaciones** (una clase en
+  `<html>`, por ejemplo), que también detenga las tuyas.
 
 ## Ideas que funcionan
 
@@ -137,13 +152,13 @@ hace falta buscarlos después.
 ## Archivos
 
 - `assets/plantilla.html`: un ejemplo completo para copiar (estructura,
-  capas, recorte, tiempos, movimiento reducido). Cambia el dibujo por tu idea.
+  capas, recorte, tiempos, tarjetas angostas, movimiento reducido). Cambia el
+  dibujo por tu idea.
 - `references/techniques.md`: cada pieza con código (luz por una línea,
-  encender partes, agujas, haces de pistas, curvas paralelas, acelerar al
-  pasar el puntero, pausar fuera de pantalla).
-- `references/generator.md`: solo para dibujos con muchas piezas calculadas
-  (decenas de ventanas, pistas paralelas, retardos desde largos): generarlas
-  con un script y probar que la página coincide.
+  encender partes, agujas, haces de pistas, curvas paralelas, y los extras
+  que solo se hacen si los piden). Lee solo la sección que necesites.
+- `references/generator.md`: no lo leas salvo que el dibujo tenga decenas de
+  piezas calculadas (ventanas, pistas paralelas, retardos desde largos).
 - `scripts/shoot.mjs`: la mirada final (capturas en un navegador sin
   interfaz, con la animación congelada en un momento). `--help` lista sus
   opciones.

@@ -16,9 +16,9 @@ caja de 300 x 280, salvo que se diga otra cosa; los colores son ejemplos
 8. Curvas paralelas
 9. Formas sólidas y orden de dibujo
 10. Texto y dibujo lado a lado
-11. Acelerar al pasar el puntero
-12. Pausar fuera de pantalla
-13. Movimiento reducido y botón para detener
+11. Acelerar al pasar el puntero (solo si lo piden)
+12. Pausar fuera de pantalla (solo si lo piden)
+13. Movimiento reducido y control del sitio para detener
 14. Rendimiento
 
 ## 1. Estructura de la tarjeta: caja, anclaje, capas
@@ -305,6 +305,9 @@ fibras = [offset_quadratic((-420, 8), (-30, 80), (240, 50), k * 4.5) for k in (-
 
 - Reserva el espacio: el espaciador `::before` arriba, y un `max-width` en el
   texto donde el dibujo está al lado.
+- En tarjetas angostas, el bloque `@container` de la plantilla pasa el dibujo
+  a una franja arriba y el texto debajo. `@container` mide el ancho de
+  adentro (sin el padding).
 - Una tarjeta cuyo dibujo es ancho a la altura del título recibe su propio
   límite en el título, en `em`, para que el corte de línea no dependa del ancho
   de la tarjeta: `max-width: min(calc(100% - 44px), 11.5em)` mantiene un
@@ -317,7 +320,7 @@ fibras = [offset_quadratic((-420, 8), (-30, 80), (240, 50), k * 4.5) for k in (-
   detrás) y oculta ahí las partes que se mueven. Nunca atenúes todo el dibujo
   para hacerle sitio al texto.
 
-## 11. Acelerar al pasar el puntero
+## 11. Acelerar al pasar el puntero (solo si lo piden)
 
 Cambia la velocidad con `playbackRate`, de forma gradual, no cambiando
 `animation-duration` (eso reinicia el ciclo y el movimiento salta). Solo con
@@ -347,7 +350,7 @@ if (!matchMedia("(prefers-reduced-motion: reduce)").matches &&
 }
 ```
 
-## 12. Pausar fuera de pantalla
+## 12. Pausar fuera de pantalla (solo si lo piden)
 
 ```js
 const watcher = new IntersectionObserver((entries) => {
@@ -362,7 +365,7 @@ document.querySelectorAll(".tile").forEach((tile) => watcher.observe(tile));
 }
 ```
 
-## 13. Movimiento reducido y botón para detener
+## 13. Movimiento reducido y control del sitio para detener
 
 ```css
 /* Después de toda regla que inicia estas animaciones: con la misma
@@ -394,5 +397,4 @@ reglas de animación y lista cada clase animada (`generator.md` tiene una).
 - Anima `transform`, `opacity` y `stroke-dashoffset`. Pon las partes que se
   mueven en su propio SVG con `will-change: transform`.
 - Nada de filtros en las partes que se mueven; los brillos son trazos.
-- Pausa fuera de pantalla, y mantén las partes en movimiento en decenas, no en
-  miles.
+- Mantén las partes en movimiento en decenas, no en miles.

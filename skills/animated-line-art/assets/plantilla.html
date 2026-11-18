@@ -27,6 +27,7 @@
     background: var(--card);
     color: #fff;
     text-decoration: none;
+    container-type: inline-size;   /* para el bloque @container de abajo */
   }
 
   /* El texto encima del dibujo, y a su izquierda: el dibujo ocupa la
@@ -46,6 +47,17 @@
     pointer-events: none;
   }
   .tile-art--moving { will-change: transform; }  /* su propia capa */
+
+  /* Tarjeta angosta (teléfonos pequeños): al lado del dibujo, el texto se
+     partiría en muchas líneas y la tarjeta crecería hasta chocar con él. El
+     dibujo pasa a una franja arriba y el texto queda debajo, a todo el ancho.
+     El ancho que mide @container es el de adentro, sin el padding: 280px
+     aquí es una tarjeta de unos 330px. */
+  @container (max-width: 280px) {
+    .tile-art { height: 150px; clip-path: inset(0 round 11px 11px 0 0); }
+    .tile > span { max-width: none; }
+    .tile-title { margin-top: 150px; }
+  }
 
   /* Un ciclo de 6 s para todo. La luz baja por el cable en el primer 15 %
      (llega al techo hacia 0,7 s); los pisos se encienden a partir de 0,75 s,
