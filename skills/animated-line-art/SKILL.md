@@ -154,6 +154,9 @@ hace falta buscarlos después.
 
 ## Archivos
 
+Las rutas de esta guía son relativas a la carpeta de esta skill (la que
+contiene este `SKILL.md`), no a la del proyecto.
+
 - `assets/plantilla.html`: un ejemplo completo para copiar (estructura,
   capas, recorte, tiempos, tarjetas angostas, movimiento reducido). Cambia el
   dibujo por tu idea.

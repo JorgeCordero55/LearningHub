@@ -14,7 +14,7 @@ es tuya: tus agentes le añaden tus propias lecciones.
 - `GENERAL.md`: lecciones que sirven para cualquier proyecto.
 - `template/`: los archivos con los que empieza un proyecto (`AGENTS.md`,
   `CLAUDE.md`, `docs/ai/LESSONS.md`).
-- `skills/`: skills para Claude, cada una en su carpeta (ver
+- `skills/`: skills para agentes de IA, cada una en su carpeta (ver
   [Skills](#skills)).
 
 Cada proyecto tiene además su propio `docs/ai/LESSONS.md` para lecciones
@@ -73,7 +73,8 @@ pantalla?". Debe responder con lo que dice el archivo.
 
 La mayoría de las demás herramientas (Codex, Copilot, Cursor...) leen el
 `AGENTS.md` de la carpeta del proyecto. El `AGENTS.md` de la plantilla las
-dirige a `../LearningHub/GENERAL.md` y a las lecciones del propio proyecto.
+dirige a `../LearningHub/GENERAL.md`, a las lecciones del propio proyecto y
+a las skills.
 
 ## Añadirlo a un proyecto
 
@@ -103,10 +104,12 @@ Nunca pongas contraseñas ni claves en ninguno de los dos.
 
 ## Skills
 
-Una skill es una carpeta con instrucciones (y a veces scripts) que Claude
-carga cuando lo que le pides encaja con su descripción. Le da a tu agente el
-proceso, las técnicas y las revisiones con las que se consiguió un buen
-resultado, en vez de dejar que improvise.
+Una skill es una carpeta con instrucciones (y a veces scripts) que tu agente
+carga cuando lo que le pides encaja con su descripción. Le da el proceso, las
+técnicas y las revisiones con las que se consiguió un buen resultado, en vez
+de dejar que improvise. Siguen el formato abierto Agent Skills (un
+`SKILL.md` por carpeta), que leen Claude, Codex, Cursor, GitHub Copilot y
+otros agentes.
 
 - `skills/animated-line-art/`: una guía para hacer dibujos de líneas
   animados (SVG y CSS) para tarjetas, banners y secciones de un sitio web, de
@@ -116,19 +119,38 @@ resultado, en vez de dejar que improvise.
   final usa un script de capturas que necesita Node.js 22 o más reciente y
   Microsoft Edge o Google Chrome.
 
-Para instalar una skill:
+Para instalar una skill, copia su carpeta a la carpeta de skills de tu
+herramienta: dentro del proyecto (haz commit y todo el equipo la tendrá) o
+dentro de tu carpeta de usuario (`~`, en Windows `C:\Users\<tu usuario>`)
+para todos tus proyectos.
 
-- **Claude Code, en todos tus proyectos:** copia su carpeta a `.claude/skills/`
-  dentro de tu carpeta de usuario (en Windows:
-  `C:\Users\<tu usuario>\.claude\skills\`).
-- **Claude Code, en un proyecto:** cópiala a `.claude/skills/` dentro del
-  proyecto y haz commit, para que todo el equipo la tenga.
+<!-- Rutas comprobadas el 2026-11-18 en la documentación de cada herramienta:
+     Codex: https://developers.openai.com/codex/skills
+     Cursor: https://cursor.com/docs/skills
+     Copilot CLI: https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/add-skills
+     Copilot en VS Code: https://code.visualstudio.com/docs/agent-customization/agent-skills
+     Claude Code: probado con las pruebas de animated-line-art. -->
+
+| Herramienta | En el proyecto | En todos tus proyectos |
+|---|---|---|
+| Claude Code | `.claude/skills/` | `~/.claude/skills/` |
+| Codex | `.agents/skills/` | `~/.agents/skills/` |
+| Cursor | `.agents/skills/` | `~/.agents/skills/` |
+| GitHub Copilot CLI | `.agents/skills/` | `~/.agents/skills/` |
+| GitHub Copilot en VS Code | `.github/skills/` | `~/.copilot/skills/` |
+
+Si usas varias herramientas, copiarla a `.agents/skills/` y a
+`.claude/skills/` las cubre todas menos Copilot en VS Code.
+
 - **App de Claude (web o escritorio):** comprime la carpeta de la skill en un
   `.zip` y súbelo como skill personalizada, si tu organización lo permite.
+- **Cualquier otro agente:** el `AGENTS.md` de la plantilla le dice que
+  busque en `../LearningHub/skills/` y lea el `SKILL.md` que encaje con la
+  tarea, sin instalar nada.
 
-Claude la usa por su cuenta cuando tu pedido encaja; también puedes pedirla
-por su nombre: "usa la skill animated-line-art". La carpeta `evals/` de cada
-skill trae casos de prueba; no hace falta copiarla.
+El agente la usa por su cuenta cuando tu pedido encaja; también puedes
+pedirla por su nombre: "usa la skill animated-line-art". La carpeta `evals/`
+de cada skill trae casos de prueba; no hace falta copiarla.
 
 ## Actualizaciones
 

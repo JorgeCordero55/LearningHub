@@ -7,6 +7,11 @@ los proyectos) y `docs/ai/LESSONS.md` (lecciones de este). Cuando el usuario
 corrija un error tuyo, añade una lección en el archivo que corresponda en ese
 mismo turno (ver `../LearningHub/README.md`).
 
+**Skills:** `../LearningHub/skills/` tiene guías para tareas concretas. Si
+la tarea encaja con la descripción al inicio de uno de sus `SKILL.md` y tu
+herramienta no la cargó ya, lee ese `SKILL.md` y síguelo (sus rutas son
+relativas a su carpeta).
+
 ## Comandos
 
 - Pruebas: `<comando exacto>`
